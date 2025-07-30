@@ -6,4 +6,8 @@ def home(request):
     #return render(request, 'home.HTML')
     return render(request, 'home.html', {'name': 'Samuel Molina'})
 
+def about(request):
+
+    return render(request, 'about.html')
+
 # Create your views here.
