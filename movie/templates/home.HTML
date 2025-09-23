@@ -1,39 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Películas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-<div class="container py-5">
-  <h1 class="mb-4 text-center">Películas</h1>
+<h1 class="mb-4 text-center">Películas</h1>
 
-  <form method="get" class="d-flex gap-2 mb-5">
-    <input type="text" name="searchMovie" class="form-control" placeholder="Buscar película">
-    <button type="submit" class="btn btn-primary">Buscar</button>
-  </form>
+<!-- Formulario de búsqueda mejorado -->
+<form action="" method="get" class="mb-3">
+  <label for="searchMovie" class="form-label">Search for Movie:</label>
+  <input type="text" id="searchMovie" name="searchMovie" class="form-control" placeholder="Buscar película">
+  <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
 
-  <div class="row">
-    {% for movie in movies %}
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          {% if movie.image %}
-            <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}">
+<p>Searching for {{ searchTerm }}</p>
+
+<!-- Cuadrícula de tarjetas usando Bootstrap -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for movie in movies %}
+    <div class="col">
+      <div class="card h-100">
+        <img src="{% static 'images/home.jpg' %}" class="card-img-top" alt="Poster">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ movie.title }}</h5>
+          <p class="card-text">{{ movie.description }}</p>
+          {% if movie.url %}
+            <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
           {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
-            <p class="card-text">{{ movie.description }}</p>
-          </div>
         </div>
       </div>
-    {% empty %}
-      <p>No se encontraron películas.</p>
-    {% endfor %}
-  </div>
+    </div>
+  {% empty %}
+    <div class="col">
+      <div class="alert alert-warning">No hay películas para mostrar.</div>
+    </div>
+  {% endfor %}
 </div>
 
-</body>
-</html>
+<br />
+<br />
+
+<h2>Join our mailing list:</h2>
+<form action="{% url 'signup' %}">
+  <div class="mb-3">
+    <label for="email" class="form-label">Enter your email:</label>
+    <input type="email" class="form-control" name="email" />
+  </div>
+  <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
+
+{% endblock content %}
