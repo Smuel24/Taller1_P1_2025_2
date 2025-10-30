@@ -13,9 +13,16 @@
   <h1 class="mb-4 text-center">Películas</h1>
 
   <!-- Formulario de búsqueda -->
-  <form method="get" class="d-flex gap-2 mb-5">
-    <input type="text" name="searchMovie" class="form-control" placeholder="Buscar película">
-    <button type="submit" class="btn btn-primary">Buscar</button>
+  <form method="get" class="row g-3 mb-5 align-items-center">
+    <div class="col-auto">
+      <label for="searchMovie" class="form-label">Search for Movie:</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" id="searchMovie" name="searchMovie" placeholder="Buscar película">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
   </form>
 
   <!-- Mostrar resultado de búsqueda -->
@@ -24,18 +31,20 @@
   {% endif %}
 
   <!-- Cards de películas -->
-  <div class="row">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for movie in movies %}
-      <div class="col-md-4 mb-4">
-        <div class="card h-100" style="width: 18rem;">
+      <div class="col">
+        <div class="card h-100">
           {% if movie.image.url %}
             <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}">
           {% else %}
             <img src="https://via.placeholder.com/300x400?text=Sin+Imagen" class="card-img-top" alt="Sin imagen">
           {% endif %}
           <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
+            <h5 class="card-title fw-bold">{{ movie.title }}</h5>
             <p class="card-text">{{ movie.description }}</p>
+          </div>
+          <div class="card-footer text-center">
             {% if movie.url %}
               <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
             {% endif %}

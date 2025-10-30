@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from news.models import News
 
 from .models import Movie
 
@@ -20,4 +21,6 @@ def about(request):
 
     return render(request, 'about.html')
 
-# Create your views here.
+def news(request):
+    news = News.objects.all().order_by('-date')
+    return render(request, 'news.html', {'news': news})
