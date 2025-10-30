@@ -1,1 +1,1 @@
-AllOWED_HOST = ['98.93.225.218']
+ALLOWED_HOSTS = ['98.93.225.218', 'localhost', '127.0.0.1']
