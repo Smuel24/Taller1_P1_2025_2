@@ -1,6 +1,9 @@
 from django.urls import path
-from movie import views  # Importo desde movie
+from . import views
 
 urlpatterns = [
-    path('', views.news, name='news')
+
+    path('', views.news, name = 'news'),
+
+
 ]
